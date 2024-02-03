@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 // import { Provider as ReduxProvider } from "react-redux";
-// import { persistStore } from "redux-persist";
 // import { PersistGate } from "redux-persist/integration/react";
 // import { store, persistor } from "@/store/store";
 import * as SplashScreen from "expo-splash-screen";
