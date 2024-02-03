@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Provider as ReduxProvider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "@/store/store";
+// import { Provider as ReduxProvider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "@/store/store";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { FontAwesome } from "@expo/vector-icons";
@@ -33,12 +33,14 @@ const RootLayout: React.FC = () => {
   }
 
   return (
-    <ReduxProvider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <StatusBar style="auto" />
-        <Slot screenOptions={{ headerShown: false }} />
-      </PersistGate>
-    </ReduxProvider>
+    // <ReduxProvider store={store}>
+    //   <PersistGate loading={null} persistor={persistor}>
+    <>
+      <StatusBar style="auto" />
+      <Slot screenOptions={{ headerShown: false }} />
+    </>
+    //   </PersistGate>
+    // </ReduxProvider>
   );
 };
 
