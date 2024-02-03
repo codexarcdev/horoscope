@@ -4,7 +4,7 @@ import { SignUpScreen } from "@/screen/auth";
 
 const SingUp: React.FC = () => {
   return (
-    <SafeAreaView className="h-screen dark:bg-midgreen">
+    <SafeAreaView className="h-screen">
       <SignUpScreen />
     </SafeAreaView>
   );

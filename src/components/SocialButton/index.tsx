@@ -1,6 +1,6 @@
 import React from "react";
-import { Image } from "expo-image";
 import { TouchableOpacity, Text } from "react-native";
+import { Image } from "expo-image";
 import { FontAwesome } from "@expo/vector-icons";
 
 interface SocialButtonTypes {
@@ -16,7 +16,7 @@ const SocialButton: React.FC<SocialButtonTypes> = ({
 }) => {
   return (
     <TouchableOpacity
-      className="flex flex-row justify-center items-center bg-gray-light rounded-md h-10 px-8 mini:px-5"
+      className="flex flex-row justify-center items-center bg-input-light rounded-md h-10 px-8 mini:px-5"
       onPress={onPress}
     >
       {type === "google" && (

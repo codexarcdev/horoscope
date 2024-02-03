@@ -6,6 +6,7 @@ const AuthLayout: React.FC = () => {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="sign-in" />
       <Stack.Screen name="sign-up" />
+      <Stack.Screen name="phone" />
       <Stack.Screen name="forgot" />
     </Stack>
   );

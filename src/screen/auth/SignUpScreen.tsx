@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Checkbox from "expo-checkbox";
 import {
   Platform,
   ScrollView,
@@ -8,19 +7,45 @@ import {
   View,
   KeyboardAvoidingView,
 } from "react-native";
+import { router } from "expo-router";
+import Checkbox from "expo-checkbox";
 import { Button, Input, Previous, SocialButton, TextLink } from "@/components";
+import { SignUpFormDataType } from "@/types/auth";
+import { loadFormData, saveFormData } from "@/utils/functions/storage";
 
 const SignUpScreen: React.FC = () => {
   const [isChecked, setChecked] = useState(false);
-
   const {
     control,
     formState: { errors },
+    setValue,
     handleSubmit,
-  } = useForm({ defaultValues: { username: "", email: "", password: "" } });
+  } = useForm<SignUpFormDataType>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  useEffect(() => {
+    const loadForm = async () => {
+      try {
+        const savedFormData = await loadFormData();
+        if (savedFormData) {
+          Object.entries(savedFormData).forEach(([key, value]) => {
+            setValue(key as keyof SignUpFormDataType, value as string);
+          });
+        }
+      } catch (error) {
+        console.error("Error loading form data:", error);
+      }
+    };
+
+    loadForm();
+  }, []);
+
+  const onSubmit = async (data: SignUpFormDataType) => {
+    try {
+      await saveFormData(data);
+      router.push("/(auth)/phone");
+    } catch (error) {
+      console.error("Error saving form data:", error);
+    }
   };
 
   const loginWithGoogle = () => {};
@@ -38,14 +63,14 @@ const SignUpScreen: React.FC = () => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
             <Controller
+              name="username"
               control={control}
               rules={{ required: true }}
-              name="username"
               render={({ field: { onChange, value } }) => (
                 <Input
+                  value={value}
                   placeholder={"Enter your Name"}
                   onChangeText={onChange}
-                  value={value}
                 />
               )}
             />
@@ -55,14 +80,14 @@ const SignUpScreen: React.FC = () => {
               </Text>
             )}
             <Controller
+              name="email"
               control={control}
               rules={{ required: true }}
-              name="email"
               render={({ field: { onChange, value } }) => (
                 <Input
+                  value={value}
                   placeholder={"Enter your Email"}
                   onChangeText={onChange}
-                  value={value}
                 />
               )}
             />
@@ -72,15 +97,15 @@ const SignUpScreen: React.FC = () => {
               </Text>
             )}
             <Controller
+              name="password"
               control={control}
               rules={{ required: true, minLength: 8 }}
-              name="password"
               render={({ field: { onChange, value } }) => (
                 <Input
+                  value={value}
                   type={"password"}
                   placeholder={"Enter your Password"}
                   onChangeText={onChange}
-                  value={value}
                 />
               )}
             />

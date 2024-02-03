@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Checkbox from "expo-checkbox";
 import {
   Platform,
   ScrollView,
@@ -8,16 +7,17 @@ import {
   View,
   KeyboardAvoidingView,
 } from "react-native";
+import Checkbox from "expo-checkbox";
 import { Button, Input, Previous, SocialButton, TextLink } from "@/components";
+import { SignInFormDataType } from "@/types/auth";
 
 const SignInScreen: React.FC = () => {
   const [isChecked, setChecked] = useState(false);
-
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: { username: "", password: "" } });
+  } = useForm<SignInFormDataType>();
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -38,13 +38,13 @@ const SignInScreen: React.FC = () => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
             <Controller
+              name="username"
               control={control}
               rules={{ required: true }}
-              name="username"
               render={({ field: { onChange, value } }) => (
                 <Input
-                  placeholder={"Enter your Name"}
                   value={value}
+                  placeholder={"Enter your Name"}
                   onChangeText={onChange}
                 />
               )}
@@ -55,13 +55,13 @@ const SignInScreen: React.FC = () => {
               </Text>
             )}
             <Controller
+              name="password"
               control={control}
               rules={{ required: true, minLength: 8 }}
-              name="password"
               render={({ field: { onChange, value } }) => (
                 <Input
-                  type={"password"}
                   value={value}
+                  type={"password"}
                   placeholder={"Enter your Password"}
                   onChangeText={onChange}
                 />

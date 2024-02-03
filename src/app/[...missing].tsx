@@ -3,7 +3,6 @@ import { Link, Stack } from "expo-router";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome } from "@expo/vector-icons";
-import "@/style/global.css";
 
 const NotFound: React.FC = () => {
   return (

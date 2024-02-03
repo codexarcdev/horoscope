@@ -1,13 +1,13 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ForgotScreen } from "@/screen/auth";
+import { PhoneScreen } from "@/screen/auth";
 
-const Forgot: React.FC = () => {
+const Phone: React.FC = () => {
   return (
     <SafeAreaView className="h-screen">
-      <ForgotScreen />
+      <PhoneScreen />
     </SafeAreaView>
   );
 };
 
-export default Forgot;
+export default Phone;

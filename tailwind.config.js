@@ -17,9 +17,13 @@ module.exports = {
       midgray: "#777777",
       midgreen: "#3FCDC3",
       midred: "#E70A0A",
-      gray: {
+      input: {
         light: "#F7F7F7",
         dark: "#161C22",
+      },
+      screen: {
+        light: "#FFFFFF",
+        dark: "#212931",
       },
     },
     extend: {
