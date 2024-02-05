@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Platform,
@@ -9,29 +9,63 @@ import {
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Button, Input, Previous, SocialButton, TextLink } from "@/components";
+import {
+  signInWithFacebook,
+  signInWithGoogle,
+  signInWithUser,
+} from "@/utils/functions/auth";
 import { SignInFormDataType } from "@/types/auth";
+import {
+  clearFormData,
+  loadFormData,
+  saveFormData,
+} from "@/utils/functions/storage";
 
 const SignInScreen: React.FC = () => {
   const [isChecked, setChecked] = useState(false);
   const {
     control,
     formState: { errors },
+    setValue,
+    getValues,
     handleSubmit,
   } = useForm<SignInFormDataType>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  useEffect(() => {
+    (async () => {
+      const savedFormData = await loadFormData("sign-in-form");
+
+      if (savedFormData) {
+        setChecked(true);
+
+        Object.entries(savedFormData).forEach(([key, value]) => {
+          setValue(key as keyof SignInFormDataType, value as string);
+        });
+      }
+    })();
+  }, []);
+
+  const onRememberMe = async () => {
+    if (!isChecked) {
+      const formData: SignInFormDataType = getValues();
+
+      await saveFormData("sign-in-form", formData);
+    } else {
+      await clearFormData("sign-in-form");
+    }
+
+    setChecked((prev) => !prev);
   };
 
-  const loginWithGoogle = () => {};
-
-  const loginWithFacebook = () => {};
+  const onSubmit = (data: SignInFormDataType) => {
+    signInWithUser(data);
+  };
 
   return (
     <ScrollView>
       <View className="flex justify-center items-center mt-8 mini:mt-5 px-7 mini:px-5">
         <Previous type="close" />
-        <Text className="text-xl text-black">Sign In</Text>
+        <Text className="text-xl">Sign In</Text>
         <View className="flex flex-col justify-center items-center w-full">
           <KeyboardAvoidingView
             className="w-full"
@@ -74,7 +108,7 @@ const SignInScreen: React.FC = () => {
             )}
             <View className="flex flex-row justify-between items-center w-full my-7 mini:my-5 px-5 mini:px-3">
               <View className="flex flex-row items-center">
-                <Checkbox value={isChecked} onValueChange={setChecked} />
+                <Checkbox value={isChecked} onValueChange={onRememberMe} />
                 <Text className="text-sm text-midgray pl-1">Remember Me</Text>
               </View>
               <TextLink
@@ -91,23 +125,19 @@ const SignInScreen: React.FC = () => {
               <SocialButton
                 type={"google"}
                 title="google"
-                onPress={loginWithGoogle}
+                onPress={signInWithGoogle}
               />
               <SocialButton
                 type={"facebook"}
                 title="facebook"
-                onPress={loginWithFacebook}
+                onPress={signInWithFacebook}
               />
             </View>
             <View className="flex flex-row justify-between items-center w-full my-16 mini:my-8 px-5 mini:px-3">
               <Text className="text-sm text-midgray">
                 You have no account yet?
               </Text>
-              <TextLink
-                title={"Sign Up"}
-                href={"/sign-up"}
-                color={"text-black"}
-              />
+              <TextLink title={"Sign Up"} href={"/sign-up"} />
             </View>
           </View>
         </View>

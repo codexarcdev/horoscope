@@ -1,13 +1,13 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ForgotScreen } from "@/screen/auth";
+import { Container } from "@/components";
 
-const Forgot: React.FC = () => {
+const SingUp: React.FC = () => {
   return (
-    <SafeAreaView className="h-screen">
+    <Container>
       <ForgotScreen />
-    </SafeAreaView>
+    </Container>
   );
 };
 
-export default Forgot;
+export default SingUp;

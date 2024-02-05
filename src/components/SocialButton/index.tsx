@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 import { Image } from "expo-image";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -15,7 +15,7 @@ const SocialButton: React.FC<SocialButtonTypes> = ({
   onPress,
 }) => {
   return (
-    <TouchableOpacity
+    <Pressable
       className="flex flex-row justify-center items-center bg-input-light rounded-md h-10 px-8 mini:px-5"
       onPress={onPress}
     >
@@ -30,7 +30,7 @@ const SocialButton: React.FC<SocialButtonTypes> = ({
         <FontAwesome name="facebook-square" size={24} color="#3D5A98" />
       )}
       <Text className="text-sm text-midgray ml-3">{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

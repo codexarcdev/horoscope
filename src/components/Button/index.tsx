@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
 interface ButtonProps {
   title: string;
@@ -8,12 +8,12 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ title, onPress }) => {
   return (
-    <TouchableOpacity
+    <Pressable
       className="flex justify-center items-center w-full h-10 mini:h-7 bg-midgreen rounded-md"
       onPress={onPress}
     >
       <Text className="text-sm text-black">{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

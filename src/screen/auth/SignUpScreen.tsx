@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Platform,
@@ -8,13 +8,16 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { router } from "expo-router";
-import Checkbox from "expo-checkbox";
 import { Button, Input, Previous, SocialButton, TextLink } from "@/components";
+import {
+  clearFormData,
+  loadFormData,
+  saveFormData,
+} from "@/utils/functions/storage";
+import { signInWithFacebook, signInWithGoogle } from "@/utils/functions/auth";
 import { SignUpFormDataType } from "@/types/auth";
-import { loadFormData, saveFormData } from "@/utils/functions/storage";
 
 const SignUpScreen: React.FC = () => {
-  const [isChecked, setChecked] = useState(false);
   const {
     control,
     formState: { errors },
@@ -23,40 +26,34 @@ const SignUpScreen: React.FC = () => {
   } = useForm<SignUpFormDataType>();
 
   useEffect(() => {
-    const loadForm = async () => {
-      try {
-        const savedFormData = await loadFormData();
-        if (savedFormData) {
-          Object.entries(savedFormData).forEach(([key, value]) => {
-            setValue(key as keyof SignUpFormDataType, value as string);
-          });
-        }
-      } catch (error) {
-        console.error("Error loading form data:", error);
-      }
-    };
+    (async () => {
+      const savedFormData = await loadFormData("sign-up-form");
 
-    loadForm();
+      if (savedFormData) {
+        Object.entries(savedFormData).forEach(([key, value]) => {
+          setValue(key as keyof SignUpFormDataType, value as string);
+        });
+      }
+
+      clearFormData("sign-up-form");
+    })();
   }, []);
 
   const onSubmit = async (data: SignUpFormDataType) => {
     try {
-      await saveFormData(data);
+      await saveFormData("sign-up-form", data);
+
       router.push("/(auth)/phone");
     } catch (error) {
       console.error("Error saving form data:", error);
     }
   };
 
-  const loginWithGoogle = () => {};
-
-  const loginWithFacebook = () => {};
-
   return (
     <ScrollView>
       <View className="flex justify-center items-center mt-8 mini:mt-5 px-7 mini:px-5">
         <Previous href="sign-in" title="Sign In" />
-        <Text className="text-xl text-black">Sign Up</Text>
+        <Text className="text-xl">Sign Up</Text>
         <View className="flex flex-col justify-center items-center w-full">
           <KeyboardAvoidingView
             className="w-full form-gap"
@@ -114,11 +111,7 @@ const SignUpScreen: React.FC = () => {
                 This must be at least 8 characters.
               </Text>
             )}
-            <View className="flex flex-row justify-between items-center w-full my-7 mini:my-5 px-5 mini:px-3">
-              <View className="flex flex-row items-center">
-                <Checkbox value={isChecked} onValueChange={setChecked} />
-                <Text className="text-sm text-midgray pl-1">Remember Me</Text>
-              </View>
+            <View className="flex flex-row justify-end items-center w-full my-7 mini:my-5 px-5 mini:px-3">
               <TextLink
                 title={"Forgot Password?"}
                 href={"/forgot"}
@@ -133,23 +126,19 @@ const SignUpScreen: React.FC = () => {
               <SocialButton
                 type={"google"}
                 title="google"
-                onPress={loginWithGoogle}
+                onPress={signInWithGoogle}
               />
               <SocialButton
                 type={"facebook"}
                 title="facebook"
-                onPress={loginWithFacebook}
+                onPress={signInWithFacebook}
               />
             </View>
             <View className="flex flex-row justify-between items-center w-full my-16 mini:my-8 px-5 mini:px-3">
               <Text className="text-sm text-midgray">
                 Already have an account ?
               </Text>
-              <TextLink
-                title={"Sign In"}
-                href={"/sign-in"}
-                color={"text-black"}
-              />
+              <TextLink title={"Sign In"} href={"/sign-in"} />
             </View>
           </View>
         </View>

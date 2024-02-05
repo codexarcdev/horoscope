@@ -9,4 +9,8 @@ interface SignUpFormDataType {
   password: string;
 }
 
-export { SignInFormDataType, SignUpFormDataType };
+interface PhoneFormDataType {
+  phone: string;
+}
+
+export { SignInFormDataType, SignUpFormDataType, PhoneFormDataType };

@@ -1,13 +1,13 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { SignInScreen } from "@/screen/auth";
+import { Container } from "@/components";
 
-const SingIn: React.FC = () => {
+const SingUp: React.FC = () => {
   return (
-    <SafeAreaView className="h-screen">
+    <Container>
       <SignInScreen />
-    </SafeAreaView>
+    </Container>
   );
 };
 
-export default SingIn;
+export default SingUp;

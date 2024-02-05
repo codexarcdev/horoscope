@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { Pressable, TextInput, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 interface InputProps {
-  type?: "text" | "password" | "phone";
+  type?: "text" | "password";
   value?: string;
   placeholder?: string;
   onChangeText?: (text: string) => void;
@@ -27,7 +27,7 @@ const Input: React.FC<InputProps> = ({
         secureTextEntry={type === "password" && !isShown}
       />
       {type === "password" && (
-        <TouchableOpacity
+        <Pressable
           className="pr-2"
           onPress={() => {
             setShown((prev) => !prev);
@@ -38,7 +38,7 @@ const Input: React.FC<InputProps> = ({
           ) : (
             <FontAwesome name="eye-slash" size={24} color="#777777" />
           )}
-        </TouchableOpacity>
+        </Pressable>
       )}
     </View>
   );

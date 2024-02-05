@@ -5,10 +5,10 @@ import { Pressable, Text } from "react-native";
 interface TextLinkProps {
   title: string;
   href: string;
-  color: string;
+  color?: string;
 }
 
-const TextLink: React.FC<TextLinkProps> = ({ title, href, color }) => {
+const TextLink: React.FC<TextLinkProps> = ({ title, href, color = "" }) => {
   return (
     <Link href={href as Href<string>} asChild>
       <Pressable>
