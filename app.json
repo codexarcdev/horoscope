@@ -15,14 +15,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cupid.horoscope"
+      "bundleIdentifier": "com.cupid20103.horoscope"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.cupid.horoscope"
+      "package": "com.cupid20103.horoscope"
     },
     "web": {
       "bundler": "metro",
@@ -39,7 +39,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "5bb81875-8b0a-400e-9389-6c0e42d37d89"
+        "projectId": "5e24399d-bb4f-4e18-bc2e-f7662c7b2548"
       }
     }
   }
