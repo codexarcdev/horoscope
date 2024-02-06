@@ -13,8 +13,8 @@ SplashScreen.preventAutoHideAsync();
 
 const RootLayout: React.FC = () => {
   const [loaded, error] = useFonts({
-    Moul: require("../assets/fonts/Moul-Regular.ttf"),
-    Manrope: require("../assets/fonts/Manrope-Regular.ttf"),
+    Moul: require("../assets/fonts/Moul.ttf"),
+    Manrope: require("../assets/fonts/Manrope.ttf"),
     ...FontAwesome.font,
   });
 
