@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { KeyboardAvoidingView, Platform, Text, View } from "react-native";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  View,
+} from "react-native";
+import PhoneInput, { ICountry } from "react-native-international-phone-number";
 import { Button, Input, Previous } from "@/components";
 import { phoneVerify } from "@/utils/functions/auth";
 import { PhoneFormDataType } from "@/types/auth";
 
 const PhoneScreen: React.FC = () => {
+  const [selectedCountry, setSelectedCountry] = useState<undefined | ICountry>(
+    undefined
+  );
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm<PhoneFormDataType>();
 
+  const handleSelectedCountry = (country: ICountry) => {
+    setSelectedCountry(country);
+  };
+
   const onSubmit = (data: PhoneFormDataType) => {
     phoneVerify(data);
+    Alert.alert("dsfdsfs", `${data.phone}`);
   };
 
   return (
@@ -29,18 +44,36 @@ const PhoneScreen: React.FC = () => {
             Please type your number, then we’ll send a verification code for
             authentication.
           </Text>
-          <Controller
-            name="phone"
-            control={control}
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Input
-                value={value}
-                placeholder={"Enter your Phone"}
-                onChangeText={onChange}
-              />
-            )}
-          />
+          {Platform.OS === "web" ? (
+            <Controller
+              name="phone"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  value={value}
+                  placeholder={"Enter your phone"}
+                  onChangeText={onChange}
+                />
+              )}
+            />
+          ) : (
+            <Controller
+              name="phone"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <PhoneInput
+                  value={value}
+                  defaultCountry={"US"}
+                  placeholder={"Enter your phone"}
+                  onChangePhoneNumber={onChange}
+                  selectedCountry={selectedCountry}
+                  onChangeSelectedCountry={handleSelectedCountry}
+                />
+              )}
+            />
+          )}
           {errors.phone && (
             <Text className="text-xs text-midred m-1">Invalid Phone.</Text>
           )}
