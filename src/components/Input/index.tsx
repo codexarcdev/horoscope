@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
   const [isShown, setShown] = useState(false);
 
   return (
-    <View className="flex flex-row justify-between items-center w-full mt-7 mini:mt-5 py-3 rounded-md bg-input-light dark:bg-input-dark">
+    <View className="flex flex-row justify-between items-center w-full py-3 rounded-md bg-input-light dark:bg-input-dark">
       <TextInput
         className="flex-1 text-sm text-midgray outline-none px-5 mini:px-3"
         value={value}

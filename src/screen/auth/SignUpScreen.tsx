@@ -64,11 +64,13 @@ const SignUpScreen: React.FC = () => {
               control={control}
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value}
-                  placeholder={"Enter your Name"}
-                  onChangeText={onChange}
-                />
+                <View className="mt-7 mini:mt-5">
+                  <Input
+                    value={value}
+                    placeholder={"Enter your Name"}
+                    onChangeText={onChange}
+                  />
+                </View>
               )}
             />
             {errors.username && (
@@ -81,11 +83,13 @@ const SignUpScreen: React.FC = () => {
               control={control}
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value}
-                  placeholder={"Enter your Email"}
-                  onChangeText={onChange}
-                />
+                <View className="mt-7 mini:mt-5">
+                  <Input
+                    value={value}
+                    placeholder={"Enter your Email"}
+                    onChangeText={onChange}
+                  />
+                </View>
               )}
             />
             {errors.email && (
@@ -98,12 +102,14 @@ const SignUpScreen: React.FC = () => {
               control={control}
               rules={{ required: true, minLength: 8 }}
               render={({ field: { onChange, value } }) => (
-                <Input
-                  value={value}
-                  type={"password"}
-                  placeholder={"Enter your Password"}
-                  onChangeText={onChange}
-                />
+                <View className="mt-7 mini:mt-5">
+                  <Input
+                    value={value}
+                    type={"password"}
+                    placeholder={"Enter your Password"}
+                    onChangeText={onChange}
+                  />
+                </View>
               )}
             />
             {errors.password && (
@@ -111,7 +117,7 @@ const SignUpScreen: React.FC = () => {
                 This must be at least 8 characters.
               </Text>
             )}
-            <View className="flex flex-row justify-end items-center w-full my-7 mini:my-5 px-5 mini:px-3">
+            <View className="flex flex-row justify-end items-center w-full mt-7 mini:mt-5 px-5 mini:px-3">
               <TextLink
                 title={"Forgot Password?"}
                 href={"/forgot"}
