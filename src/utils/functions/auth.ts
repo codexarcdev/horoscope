@@ -6,11 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
-import {
-  PhoneFormDataType,
-  SignInFormDataType,
-  SignUpFormDataType,
-} from "@/types/auth";
+import { PhoneFormDataType, SignInFormDataType } from "@/types/auth";
 
 const signInWithUser = async (data: SignInFormDataType) => {
   console.log(data);
