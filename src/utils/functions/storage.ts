@@ -1,10 +1,14 @@
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SignInFormDataType, SignUpFormDataType } from "@/types/auth";
+import {
+  PhoneFormDataType,
+  SignInFormDataType,
+  SignUpFormDataType,
+} from "@/types/auth";
 
 const saveFormData = async (
   index: string,
-  data: SignInFormDataType | SignUpFormDataType
+  data: SignInFormDataType | SignUpFormDataType | PhoneFormDataType
 ) => {
   try {
     if (Platform.OS === "web") {

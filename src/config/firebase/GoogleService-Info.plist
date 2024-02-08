@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>673887453566-5mu8oqpff85bb8t52ekug0ug3vrn7aq9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.673887453566-5mu8oqpff85bb8t52ekug0ug3vrn7aq9</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>673887453566-lmkn4vjdh4dktlmtrqb40h4rdsfmtjrf.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBUdzrYOtbyu28jsdrwcttwgQYdKJ6ACTc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>673887453566</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cupid20103.horoscope</string>
+	<key>PROJECT_ID</key>
+	<string>cupid-c617f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cupid-c617f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:673887453566:ios:0cd288b10d025c5c18332f</string>
+</dict>
+</plist>

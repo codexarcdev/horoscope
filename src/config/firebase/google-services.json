@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "673887453566",
+    "project_id": "cupid-c617f",
+    "storage_bucket": "cupid-c617f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673887453566:android:69d74bf1aa045f4f18332f",
+        "android_client_info": {
+          "package_name": "com.cupid20103.horoscope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673887453566-lmkn4vjdh4dktlmtrqb40h4rdsfmtjrf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cupid20103.horoscope",
+            "certificate_hash": "be89be1acd535429e4a2b9d799b805c536d1b66a"
+          }
+        },
+        {
+          "client_id": "673887453566-37kpdof0e79mehnp613vih60fnor43i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPau5eYzRGEayIFlQBxWnZTcOD9ZjDLyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673887453566-37kpdof0e79mehnp613vih60fnor43i5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-// import { Provider as ReduxProvider } from "react-redux";
-// import { PersistGate } from "redux-persist/integration/react";
-// import { store, persistor } from "@/store/store";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { FontAwesome } from "@expo/vector-icons";
+// import { Provider as StoreProvider } from "react-redux";
+// import { PersistGate } from "redux-persist/integration/react";
+// import { store, persistor } from "@/store/store";
 import "@/style/global.css";
 
 SplashScreen.preventAutoHideAsync();
@@ -33,14 +34,14 @@ const RootLayout: React.FC = () => {
   }
 
   return (
-    // <ReduxProvider store={store}>
+    // <StoreProvider store={store}>
     //   <PersistGate loading={null} persistor={persistor}>
-    <>
+    <SafeAreaProvider>
       <StatusBar style="auto" />
       <Slot screenOptions={{ headerShown: false }} />
-    </>
+    </SafeAreaProvider>
     //   </PersistGate>
-    // </ReduxProvider>
+    // </StoreProvider>
   );
 };
 

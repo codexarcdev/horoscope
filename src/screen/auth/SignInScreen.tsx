@@ -14,12 +14,12 @@ import {
   signInWithGoogle,
   signInWithUser,
 } from "@/utils/functions/auth";
-import { SignInFormDataType } from "@/types/auth";
 import {
   clearFormData,
   loadFormData,
   saveFormData,
 } from "@/utils/functions/storage";
+import { SignInFormDataType } from "@/types/auth";
 
 const SignInScreen: React.FC = () => {
   const [isChecked, setChecked] = useState(false);
@@ -47,7 +47,7 @@ const SignInScreen: React.FC = () => {
 
   const onRememberMe = async () => {
     if (!isChecked) {
-      const formData: SignInFormDataType = getValues();
+      const formData = getValues();
 
       await saveFormData("sign-in-form", formData);
     } else {
@@ -64,7 +64,7 @@ const SignInScreen: React.FC = () => {
   return (
     <ScrollView>
       <View className="flex justify-center items-center mt-8 mini:mt-5 px-7 mini:px-5">
-        <Previous type="close" />
+        <Previous type={"close"} />
         <Text className="text-xl">Sign In</Text>
         <View className="flex flex-col justify-center items-center w-full">
           <KeyboardAvoidingView
@@ -141,7 +141,7 @@ const SignInScreen: React.FC = () => {
               <Text className="text-sm text-midgray">
                 You have no account yet?
               </Text>
-              <TextLink title={"Sign Up"} href={"/sign-up"} />
+              <TextLink title={"Sign Up"} href={"/signup"} />
             </View>
           </View>
         </View>

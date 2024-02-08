@@ -13,4 +13,13 @@ interface PhoneFormDataType {
   phone: string;
 }
 
-export { SignInFormDataType, SignUpFormDataType, PhoneFormDataType };
+interface OTPFormDataType {
+  otp: string;
+}
+
+export {
+  SignInFormDataType,
+  SignUpFormDataType,
+  PhoneFormDataType,
+  OTPFormDataType,
+};

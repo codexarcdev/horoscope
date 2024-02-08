@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -7,62 +6,76 @@ import {
   Text,
   View,
 } from "react-native";
-import PhoneInput, { ICountry } from "react-native-international-phone-number";
+import PhoneInput from "react-native-phone-number-input";
+import { router } from "expo-router";
 import { Button, Previous } from "@/components";
 import { phoneVerify } from "@/utils/functions/auth";
-import { PhoneFormDataType } from "@/types/auth";
+import { saveFormData } from "@/utils/functions/storage";
 
 const PhoneScreen: React.FC = () => {
-  const [selectedCountry, setSelectedCountry] = useState<undefined | ICountry>(
-    undefined
-  );
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<PhoneFormDataType>();
+  const phoneInput = useRef<PhoneInput>(null);
+  const [number, setPhoneNumber] = useState<string>("");
+  const [country, setCountry] = useState<string>("1");
+  const [isValid, setIsValid] = useState(true);
 
-  const handleSelectedCountry = (country: ICountry) => {
-    setSelectedCountry(country);
+  const onChangeText = (data: string) => {
+    setPhoneNumber(data);
+
+    if (phoneInput.current?.isValidNumber(data)) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
   };
 
-  const onSubmit = (data: PhoneFormDataType) => {
-    phoneVerify(data);
+  const onSubmit = async () => {
+    await saveFormData("phone-form", {
+      phone: `${country} ${number}`,
+    });
+
+    await phoneVerify({
+      phone: `${country} ${number}`,
+    });
+
+    router.push("/(auth)/otp");
   };
 
   return (
     <ScrollView>
       <View className="flex justify-center items-center mt-8 mini:mt-5 px-7 mini:px-5">
-        <Previous href="sign-up" title="Sign Up" />
+        <Previous href={"signup"} title={"Sign Up"} />
         <Text className="text-xl">Register with Mobile</Text>
         <View className="flex flex-col justify-center items-center w-full">
           <KeyboardAvoidingView
             className="w-full"
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <Text className="text-sm text-midgray my-7 mini:my-5 break-all">
+            <Text className="text-sm text-midgray mt-7 mini:mt-5 break-all">
               Please type your number, then we’ll send a verification code for
               authentication.
             </Text>
-            <Controller
-              name="phone"
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, value } }) => (
-                <PhoneInput
-                  value={value}
-                  defaultCountry={"US"}
-                  placeholder={"Enter your phone"}
-                  onChangePhoneNumber={onChange}
-                  selectedCountry={selectedCountry}
-                  onChangeSelectedCountry={handleSelectedCountry}
-                />
+            <View className="mt-7 mini:mt-5">
+              <PhoneInput
+                ref={phoneInput}
+                value={number}
+                defaultCode={"US"}
+                placeholder={"Enter your phone"}
+                onChangeText={onChangeText}
+                onChangeCountry={(country) =>
+                  setCountry(country.callingCode[0])
+                }
+                containerStyle={{ width: "100%", borderRadius: 6 }}
+                textInputStyle={{ fontSize: 14 }}
+              />
+              {!isValid && (
+                <Text className="text-xs text-midred m-1">Invalid Phone.</Text>
               )}
+            </View>
+            <Button
+              title={"Send OTP"}
+              onPress={onSubmit}
+              disabled={!isValid || number.length === 0}
             />
-            {errors.phone && (
-              <Text className="text-xs text-midred m-1">Invalid Phone.</Text>
-            )}
-            <Button title={"Send OTP"} onPress={handleSubmit(onSubmit)} />
           </KeyboardAvoidingView>
         </View>
       </View>

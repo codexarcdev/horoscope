@@ -40,19 +40,15 @@ const SignUpScreen: React.FC = () => {
   }, []);
 
   const onSubmit = async (data: SignUpFormDataType) => {
-    try {
-      await saveFormData("sign-up-form", data);
+    await saveFormData("sign-up-form", data);
 
-      router.push("/(auth)/phone");
-    } catch (error) {
-      console.error("Error saving form data:", error);
-    }
+    router.push("/(auth)/phone");
   };
 
   return (
     <ScrollView>
       <View className="flex justify-center items-center mt-8 mini:mt-5 px-7 mini:px-5">
-        <Previous href="sign-in" title="Sign In" />
+        <Previous href={"signin"} title={"Sign In"} />
         <Text className="text-xl">Sign Up</Text>
         <View className="flex flex-col justify-center items-center w-full">
           <KeyboardAvoidingView
@@ -144,7 +140,7 @@ const SignUpScreen: React.FC = () => {
               <Text className="text-sm text-midgray">
                 Already have an account ?
               </Text>
-              <TextLink title={"Sign In"} href={"/sign-in"} />
+              <TextLink title={"Sign In"} href={"/signin"} />
             </View>
           </View>
         </View>
